@@ -28,37 +28,59 @@ ARTICLES = [
 #########################
 
 def calculate_recipients
-  ARTICLES.map {|article| article[:section]}.uniq
+  ARTICLES.map{|article| article[:section]}.uniq
 end
+
+# def calculate_recipients
+#   SUBSCRIBERS.reject do |email|
+#     UNSUBSCRIBED.include?(email)
+#   end
+# end
+
 
   # Using the SUBSCRIBERS and UNSUBSCRIBED arrays,
   # write a method that will return an array of only the subscribers who haven't unsubscribed
 
-def first_n_articles(number_of_articles)
-  ARTICLES.first
-end
+  def first_n_articles(number_of_articles)
+    ARTICLES.first
+  end
 
-def print_recipients
-  calculate_recipients.join(",")
-  # Write a method that uses the output of calculate_recipients
-  # and returns a list of emails separated by commas
-  # Ex) "abc@email.com, def@email.com, ghi@email.com"
-end
+  def print_recipients
+    calculate_recipients.join(",")
+    # Write a method that uses the output of calculate_recipients
+    # and returns a list of emails separated by commas
+    # Ex) "abc@email.com, def@email.com, ghi@email.com"
+  end
 
-def print_one_article(article)
-  print_newsletter(article)
+  def print_one_article(article)
+    article.each{|art|
+      puts "#{article[:title]}"
+      puts "by: #{article[:author]}"
+      puts "#{article[:text]}"
+    }
+  end
+
+
+  #print_newsletter(article)
+  #  puts article
+  #  puts "by: #{article[:author]}"
+  #  puts "#{article[:text]}"
   # Write a method that will take an article hash
   # and print the title, author and text as a formatted string
   # See the README/sample output for examples
-end
+
 
 def print_many_articles(articles)
+  articles.each do |article|
+    print_one_article(article)
+  end
+
   # Write a method that will take in an array of article hashes
   # and format each one using the print_one_article method
 end
 
 def format_campus_location(campus)
-  "Flatiron #{campus["name"]}DC"
+  "Flatiron DC #{campus["name"]}"
 end
 
 def format_subject
